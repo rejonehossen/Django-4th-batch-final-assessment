@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Profile</h2>
+    <div class="card mx-auto" style="max-width: 400px;">
+        <div class="card-body">
+            <h5 class="card-title">Hello, {{ user.username }}!</h5>
+            <p class="card-text">Email: {{ user.email }}</p>
+            
+
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Your Cash Entries</h4>
+                    <ul class="list-group">
+                        {% for entry in cash_entries %}
+                            <li class="list-group-item">
+                                <strong>{{ entry.source }}</strong>: ${{ entry.amount }} on {{ entry.datetime }}
+                                <p>{{ entry.description }}</p>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">No cash entries found.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4>Your Expenses</h4>
+                    <ul class="list-group">
+                        {% for expense in expenses %}
+                            <li class="list-group-item">
+                                <strong>{{ expense.description }}</strong>: ${{ expense.amount }} on {{ expense.datetime }}
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">No expenses found.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+
+            <a href="{% url 'dashboard' %}" class="btn btn-primary btn-block">Go to Dashboard</a>
+            <a href="{% url 'signout' %}" class="btn btn-secondary btn-block">Logout</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{% endblock content %}

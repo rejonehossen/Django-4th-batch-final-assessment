@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Cash Entries</h2>
+    <ul class="list-group">
+        {% for cash in cash_entries %}
+            <li class="list-group-item">
+                {{ cash.source }} - ${{ cash.amount }} 
+                <br>
+                <small>Created at: {{ cash.datetime }}</small>
+                <br>
+                <small>Last edited at: {{ cash.updated_at }}</small>
+                <br>
+                <a href="{% url 'update_cash' cash.id %}" class="btn btn-primary btn-sm">Edit</a> 
+                <a href="{% url 'delete_cash' cash.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="mt-3">
+        <a href="{% url 'add_cash' %}" class="btn btn-primary">Add New Cash</a>
+    </div>
+</div>
+{% endblock %}
